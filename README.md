@@ -39,7 +39,7 @@ cd cesium_pnt_generator
 npm install
 ```
 
-Install liblas-bin from the aptitude repository - this is needed to split and transform the las data:
+Install liblas-bin from aptitude - this is needed to split and transform the las data:
 
 ```
 sudo apt-get install liblas-bin
@@ -49,10 +49,10 @@ Pull down sample lidar .las and .tif data (178 MB) of Autzen Stadium in Eugene, 
 
 ```
 wget https://s3-us-west-2.amazonaws.com/s3.parallel.works/sample_lidar_data.tgz
-tar -xzvf sample_lidar.tgz
+tar -xzvf sample_lidar_data.tgz
 ```
 
-Process the lidar data into Cesium 3d-tile .pnts files by running the commands below. This script splits the lidar file into smaller las chunks places the generated pnts files into a new "tiles" directory. 
+Process the lidar data into Cesium 3d-tile .pnts files by running the command below. This script splits the lidar file into smaller las chunks places the generated pnts files into a desired directory. 
 
 ```
 # USAGE - process_lidar.sh <las file> <las image> <las split size in MB> <result dir> <lidar height adjust>
