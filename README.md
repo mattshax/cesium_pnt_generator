@@ -11,7 +11,7 @@ Sample lidar .las and .tif data of Autzen Stadium in Eugene, OR have been prepro
 To view these 3d pointcloud tiles, clone the repository, install required npm modules and start the viewer: 
 
 ```
-git clone 
+git clone https://github.com/mattshax/cesium_pnt_generator.git
 cd cesium_pnt_generator/viewer
 npm install
 npm start
@@ -34,7 +34,7 @@ Please note these .pnts file generation scripts have only been tested on Ubuntu 
 Clone the repository and install the required npm modules:
 
 ```
-git clone 
+git clone https://github.com/mattshax/cesium_pnt_generator.git
 cd viewer
 npm install
 ```
@@ -76,7 +76,7 @@ Navigate to [http://localhost:3000/](http://localhost:3000/) to view the newly g
 
 The MIT License (MIT)
 
-Copyright (c) 2015 - Matthew Shaxted
+Copyright (c) 2016 - Matthew Shaxted
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
