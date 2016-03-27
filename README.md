@@ -21,8 +21,8 @@ Navigate to [http://localhost:3000/](http://localhost:3000/) to view the newly g
 
 You should see something similar to below:
 
-![](screenshots/1.png =250x) | ![](screenshots/2.png =250x)
-![](screenshots/3.png =250x) | ![](screenshots/4.png =250x)
+![](https://raw.githubusercontent.com/mattshax/cesium_pnt_generator/master/screenshots/1.png =250x) | ![](https://raw.githubusercontent.com/mattshax/cesium_pnt_generator/master/screenshots/2.png =250x) |
+![](https://raw.githubusercontent.com/mattshax/cesium_pnt_generator/master/screenshots/3.png =250x) | ![](https://raw.githubusercontent.com/mattshax/cesium_pnt_generator/master/screenshots/4.png =250x)
 
 * * *
 
