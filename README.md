@@ -21,8 +21,10 @@ Navigate to [http://localhost:3000/](http://localhost:3000/) to view the newly g
 
 You should see something similar to below:
 
-![](screenshots/1.png) | ![](screenshots/2.png) |
-![](screenshots/3.png) | ![](screenshots/4.png)
+<img src="screenshots/1.png" style="width: 200px;"/>
+<img src="screenshots/2.png" style="width: 200px;"/>
+<img src="screenshots/3.png" style="width: 200px;"/>
+<img src="screenshots/4.png" style="width: 200px;"/>
 
 * * *
 
