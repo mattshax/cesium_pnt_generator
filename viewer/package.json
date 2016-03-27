@@ -1,0 +1,13 @@
+{
+  "name": "simple_pnts_viewer",
+  "dependencies": {
+    "async": "1.5.2",
+    "compression": "1.6.1",
+    "express": "4.13.4",
+    "request": "2.69.0",
+    "yargs": "4.2.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}

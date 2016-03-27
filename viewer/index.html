@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Sample Point Cloud Viewer</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/Cesium_Tiles/Cesium.js"></script>
+  <script src="js/jquery-1.12.2.min.js"></script>
+  <style>
+    @import url(js/Cesium_Tiles/Widgets/widgets.css);
+  </style>
+</head>
+
+<body>
+
+  <div id="cesiumContainer"></div>
+
+  <script>
+    var basemapProvider = new Cesium.UrlTemplateImageryProvider({
+      url: 'http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png', // e.g.: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png,
+      credit: ''
+    });
+
+    var terrainProvider = new Cesium.CesiumTerrainProvider({
+      url: '//assets.agi.com/stk-terrain/world'
+    });
+
+    //viewer.
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+      //imageryProvider: basemapProvider,
+      terrainProvider: terrainProvider,
+      baseLayerPicker: false,
+      fullscreenButton: false,
+      homeButton: false,
+      timeline: false,
+      navigationHelpButton: false,
+      animation: false,
+      scene3DOnly: true,
+      geocoder: false
+    });
+    var scene = viewer.scene;
+
+    document.body.onkeyup = function(e) {
+      if (e.keyCode == 32) {
+        console.log(window.viewer.camera);
+      }
+    }
+
+    // custom viewer to view all lidar data
+    window.viewer.camera.position = {
+      x: -2505040.267327988,
+      y: -3849579.8556679944,
+      z: 4413232.863541417
+    }
+
+    window.viewer.camera.right = {
+      x: 0.7697564190624282,
+      y: 0.1956700897024687,
+      z: 0.6076086497982189
+    }
+
+    window.viewer.camera.up = {
+      x: -0.6383369044126985,
+      y: 0.23748291737685143,
+      z: 0.7322075255148646
+    }
+
+    window.viewer.camera.direction = {
+      x: 0.0010255625791728473,
+      y: 0.9514804674559364,
+      z: -0.3077074394148404
+    }
+
+
+    load_tiles();
+
+    function load_tiles() {
+
+      var tileset;
+
+      // get the list of tiles
+      $.get('data/tiles.txt', function(d) {
+
+        var tiles = d.split("\n");
+        var tiles = tiles.filter(function(v) {
+          return v !== ''
+        });
+
+        function loadTileset(i) {
+          var url = 'data/' + tiles[i] + '.json';
+          console.log('loading ' + url)
+          tileset = scene.primitives.add(new Cesium.Cesium3DTileset({
+            url: url
+          }));
+          return Cesium.when(tileset.readyPromise).then(function(tileset) {
+            var bounding = tileset._root._boundingVolume;
+            var center = bounding.boundingSphere.center
+            var cart = Cesium.Ellipsoid.WGS84.cartesianToCartographic(center);
+
+            // uncomment this code to refresh the camera upon tile load 
+            //viewer.camera.setView({
+            //  destination: Cesium.Cartesian3.fromDegrees(cart.longitude * (180 / Math.PI), cart.latitude * (180 / Math.PI), 1000)
+            //});
+            if (i < tiles.length - 1) {
+              loadTileset(i + 1)
+            }
+            else {
+              console.log('tile load complete');
+            }
+          });
+        }
+
+        loadTileset(0);
+
+      });
+
+    }
+  </script>
+</body>
+
+</html>

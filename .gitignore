@@ -1,0 +1,6 @@
+node_modules
+viewer/node_modules
+*.las
+*.tif
+*.tgz
+tmp
