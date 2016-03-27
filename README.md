@@ -35,7 +35,7 @@ Clone the repository and install the required npm modules:
 
 ```
 git clone https://github.com/mattshax/cesium_pnt_generator.git
-cd viewer
+cd cesium_pnt_generator
 npm install
 ```
 
