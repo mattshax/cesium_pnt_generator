@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var bParser = require('binary-parser').Parser;
-
+ 
 var pointFile=process.argv[2];
 var colorFile=process.argv[3];
 var outFile=process.argv[4];
