@@ -3,13 +3,14 @@
 # install nodejs and the liblas library to use this script:
 #sudo apt-get install liblas-bin
 
-# USAGE - process_lidar.sh <las file> <las image> <las split size in MB> <result dir> <lidar height adjust>
+# USAGE - process_lidar.sh <las file> <las image> <las split size in MB> <result dir> <lidar height adjust> <EPSG>
 
 lidar=$1
 lidar_image=$2
 split_size=$3
 result_dir=$4
 height_adjust=$5
+epsg=$6
 
 echo "splitting las file"
 rm tmp $result_dir $result_dir/tiles.txt -R >/dev/null 2>&1;mkdir -p tmp $result_dir
@@ -34,7 +35,7 @@ for file in tmp/s-*.las; do
     
     # project the data 
     echo $case "- transforming las projection"
-    las2las --a_srs EPSG:2994 --t_srs EPSG:4326 $file --scale 0.000001 0.000001 0.01 -o tmp/p.las
+    las2las --a_srs EPSG:$epsg --t_srs EPSG:4326 $file --scale 0.000001 0.000001 0.01 -o tmp/p.las
     
     # output the points
     echo $case "- exporting points"
