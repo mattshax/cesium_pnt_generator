@@ -3,7 +3,7 @@
 # install nodejs and the liblas library to use this script:
 #sudo apt-get install liblas-bin
 
-# USAGE - process_lidar.sh <las file> <las image> <las split size in MB> <result dir> <lidar height adjust> <EPSG>
+# USAGE - process_lidar.sh <las file> <las image> <las split size in MB> <result dir> <lidar height adjust> <source EPSG>
 
 lidar=$1
 lidar_image=$2

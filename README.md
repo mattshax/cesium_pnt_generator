@@ -55,9 +55,9 @@ tar -xzvf sample_lidar_data.tgz
 Process the lidar data into Cesium 3d-tile .pnts files by running the command below. This script splits the lidar file into smaller las chunks places the generated pnts files into a desired directory. 
 
 ```
-# USAGE - process_lidar.sh <las file> <las image> <las split size in MB> <result dir> <lidar height adjust>
+# USAGE - process_lidar.sh <las file> <las image> <las split size in MB> <result dir> <lidar height adjust> <source EPSG>
 
-./process_lidar.sh stadium_all.las image.tif 15 viewer/data -20
+./process_lidar.sh stadium_all.las image.tif 15 viewer/data -20 2994
 ```
 
 To view the newly generated 3d-tile .pnts files in a Cesium viewer, start the Cesium viewer with the commands below:
