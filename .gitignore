@@ -4,3 +4,8 @@ viewer/node_modules
 *.tif
 *.tgz
 tmp
+coasters
+*.kml
+output
+logs
+tmp

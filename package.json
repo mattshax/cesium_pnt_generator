@@ -1,6 +1,0 @@
-{
-  "name": "cesium_pnt_las",
-  "dependencies": {
-    "binary-parser":"1.1.5"
-  }
-}

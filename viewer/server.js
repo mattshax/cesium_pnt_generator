@@ -9,7 +9,7 @@
 
     var yargs = require('yargs').options({
         'port' : {
-            'default' : 3000,
+            'default' : 3050,
             'description' : 'Port to listen on.'
         },
         'public' : {

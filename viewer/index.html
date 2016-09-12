@@ -16,18 +16,28 @@
   <div id="cesiumContainer"></div>
 
   <script>
-    var basemapProvider = new Cesium.UrlTemplateImageryProvider({
-      url: 'http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png', // e.g.: http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png,
+    var dark_basemapProvider = new Cesium.UrlTemplateImageryProvider({
+      url: 'http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
       credit: ''
+    });
+    var light_basemapProvider = new Cesium.UrlTemplateImageryProvider({
+      url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+      credit: ''
+    });
+    var naturalEarth = new Cesium.TileMapServiceImageryProvider({
+      url: '//cesiumjs.org/tilesets/imagery/naturalearthii'
     });
 
     var terrainProvider = new Cesium.CesiumTerrainProvider({
       url: '//assets.agi.com/stk-terrain/world'
     });
 
-    //viewer.
+    Cesium.BingMapsApi.defaultKey = 'AoQ-ldid5Zpdn4YKoSfVLhF1kWycQXAAnH-KKGwBpxb7YfPPoP7F0T4GMJhVdLsU';
+
     var viewer = new Cesium.Viewer('cesiumContainer', {
-      //imageryProvider: basemapProvider,
+      imageryProvider: light_basemapProvider,
+      //imageryProvider: dark_basemapProvider,
+      //imageryProvider: naturalEarth,
       terrainProvider: terrainProvider,
       baseLayerPicker: false,
       fullscreenButton: false,
@@ -71,15 +81,27 @@
       z: -0.3077074394148404
     }
 
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var TIME = getParameterByName('TIME');
 
     load_tiles();
 
     function load_tiles() {
 
       var tileset;
+      var tileList = [];
 
       // get the list of tiles
-      $.get('data/tiles.txt', function(d) {
+      $.get('https://d1r1mnth168hw3.cloudfront.net/pntgen/tiles/' + TIME + '_tiles.txt', function(d) {
 
         var tiles = d.split("\n");
         var tiles = tiles.filter(function(v) {
@@ -87,7 +109,10 @@
         });
 
         function loadTileset(i) {
-          var url = 'data/' + tiles[i] + '.json';
+
+          console.log(tiles[i])
+
+          var url = 'https://d1r1mnth168hw3.cloudfront.net/pntgen/json/' + tiles[i] + '.json';
           console.log('loading ' + url)
           tileset = scene.primitives.add(new Cesium.Cesium3DTileset({
             url: url
@@ -96,16 +121,37 @@
             var bounding = tileset._root._boundingVolume;
             var center = bounding.boundingSphere.center
             var cart = Cesium.Ellipsoid.WGS84.cartesianToCartographic(center);
+            tileList.push(tileset);
 
             // uncomment this code to refresh the camera upon tile load 
             //viewer.camera.setView({
             //  destination: Cesium.Cartesian3.fromDegrees(cart.longitude * (180 / Math.PI), cart.latitude * (180 / Math.PI), 1000)
             //});
+
             if (i < tiles.length - 1) {
               loadTileset(i + 1)
             }
             else {
               console.log('tile load complete');
+              
+              /*    
+              viewer.camera.setView({
+                destination: Cesium.Cartesian3.fromDegrees(cart.longitude * (180 / Math.PI), cart.latitude * (180 / Math.PI), 1000)
+              });
+              */
+              // zoom to tiles
+              /*
+              var west = -90.0;
+              var south = 38.0;
+              var east = -87.0;
+              var north = 40.0;
+              var rectangle = Cesium.Rectangle.fromDegrees(west, south, east, north);
+              
+              viewer.camera.flyTo({
+                  destination : rectangle
+              });
+              */
+
             }
           });
         }
