@@ -1,6 +1,6 @@
 # Cesium 3D-Tiles Prototype Point Cloud Converter
 
-This set of node.js and shell scripts (initial prototype) converts las lidar data into Cesium 3d-tiles binary .pnts files based on the prototype 3d-tiles specification outlined at [this link](https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/TileFormats/Points).
+This set of node.js and shell scripts (initial prototype) converts las lidar data into Cesium 3d-tiles binary .pnts files based on the prototype 3d-tiles specification outlined at [this link](https://github.com/AnalyticalGraphicsInc/3d-tiles/tree/master/TileFormats/PointCloud).
 
 * * *
 
