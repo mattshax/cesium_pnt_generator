@@ -48,7 +48,6 @@ for file in tmp/$filename-*.las; do
     # process the cesium data
     node RTC.js tmp/p.txt tmp/c.txt $result_dir/$case $height_adjust
     
-    echo $case >> $result_dir/tiles.txt
 done
 ./make_tileset.sh $filename $result_dir
 rm tmp -R
