@@ -11,14 +11,18 @@ split_size=$3
 result_dir=$4
 height_adjust=$5
 epsg=$6
+filename=$(basename $lidar .las)
+result_dir=$result_dir/$filename
+mkdir $result_dir
 
 echo "splitting las file"
-rm tmp $result_dir $result_dir/tiles.txt -R >/dev/null 2>&1;mkdir -p tmp $result_dir
-las2las --split-mb $split_size $lidar -o tmp/s
-rename 's/\d+/sprintf("%04d",$&)/e' tmp/s-*
+#rm tmp $result_dir $result_dir/tiles.txt -R >/dev/null 2>&1;mkdir -p tmp $result_dir
+rm -r tmp  >/dev/null 2>&1;mkdir -p tmp $result_dir
+las2las --split-mb $split_size $lidar -o tmp/$filename
+rename 's/\d+/sprintf("%04d",$&)/e' tmp/$filename-*
 
 # process each file
-for file in tmp/s-*.las; do
+for file in tmp/$filename-*.las; do
     case=$(basename $file .las)
     echo $case "- processing"
 
@@ -44,7 +48,6 @@ for file in tmp/s-*.las; do
     # process the cesium data
     node RTC.js tmp/p.txt tmp/c.txt $result_dir/$case $height_adjust
     
-    echo $case >> $result_dir/tiles.txt
 done
-
+./make_tileset.sh $filename $result_dir
 rm tmp -R

@@ -69,25 +69,26 @@ for (var i = 0; i < ptsxyz.length; i++) {
 console.log('generating tileset.json');
 //console.log(centerxyz)
 
-var template='{'+
-  '"asset": {'+
-    '"version": "0.0"'+
-  '},'+
-  '"geometricError": 10000,'+
-  '"refine": "add",'+
-  '"root": {'+
-    '"boundingVolume": {'+
+var template='{'+'\n'+
+  '"asset": {'+'\n'+
+    '"version": "0.0"'+'\n'+
+  '},'+'\n'+
+  '"geometricError": 10000,'+'\n'+
+  '"refine": "add",'+'\n'+
+  '"root":'+'\n'+
+	'{'+'\n'+
+    '"boundingVolume": {'+'\n'+
       '"sphere": ['+centerxyz.join(",")+','+
         '100'+
-      ']'+
-    '},'+
-    '"geometricError": 0,'+
-    '"content": {'+
-      '"url": "'+outFile.split("/")[outFile.split("/").length-1]+'.pnts"'+
-    '},'+
-    '"children": []'+
-  '}'+
-'}'
+      ']'+'\n'+
+    '},'+'\n'+
+    '"geometricError": 0,'+'\n'+
+    '"content": {'+'\n'+
+      '"url": "'+outFile.split("/")[outFile.split("/").length-1]+'.pnts"'+'\n'+
+    '},'+'\n'+
+    '"children": []'+'\n'+
+  '}'+'\n'+
+'}'+'\n'
 
 var tmpwrite = fs.writeFileSync(outFile+".json", template);
 

@@ -1,5 +1,7 @@
 node_modules
 viewer/node_modules
+viewer/*.log
+*.log
 *.las
 *.tif
 *.tgz

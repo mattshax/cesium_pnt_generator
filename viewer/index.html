@@ -3,16 +3,52 @@
 
 <head>
   <title>Sample Point Cloud Viewer</title>
-  <link rel="stylesheet" href="css/main.css">
   <script src="js/Cesium_Tiles/Cesium.js"></script>
   <script src="js/jquery-1.12.2.min.js"></script>
   <style>
     @import url(js/Cesium_Tiles/Widgets/widgets.css);
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </style>
 </head>
 
 <body>
 
+  <div id="top">
+	  <div class="container">
+	          <div class="row">
+                <div class="col-xs-2 col-sm-3"></div>
+                <div class="col-xs-8 col-sm-6">
+                    <a href="https://github.com/AnalyticalGraphicsInc/3d-tiles">
+                        <img
+                            class="center-block"
+                            id="tiles-banner"
+                            src="img/3d-tiles.png"/>
+                    </a>
+                </div>
+                <div class="col-xs-2 col-sm-3"></div>
+            </div>
+
+		  <div id="resources" class="center-block">
+			  <table class="table">
+				  <thead>
+					  <tr><th class="text-center">Resources</th></tr>
+				  </thead>
+				  <tbody>
+					  <tr><td class="text-center">
+							  <a href="?resource=stadium_all" />Stadium</a>
+						  </td></tr>
+
+				  </tbody>
+			  </table>
+		  </div>
+		  <div class="col-xs-10 col-sm-2"></div>
+	  </div>
+  </div>
+  </div>
+
+  
+  
+  </div>
   <div id="cesiumContainer"></div>
 
   <script>
@@ -24,98 +60,87 @@
     var terrainProvider = new Cesium.CesiumTerrainProvider({
       url: '//assets.agi.com/stk-terrain/world'
     });
+var getQueryParam = function(name) {
+	name = name.replace(/[<81>_[<81>_]]/g, "<81>_<81>_$&");
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	results = regex.exec(window.location.href);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/<81>_+/g, " "));
+};
 
-    //viewer.
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-      //imageryProvider: basemapProvider,
-      terrainProvider: terrainProvider,
-      baseLayerPicker: false,
-      fullscreenButton: false,
-      homeButton: false,
-      timeline: false,
-      navigationHelpButton: false,
-      animation: false,
-      scene3DOnly: true,
-      geocoder: false
-    });
-    var scene = viewer.scene;
+var resource = getQueryParam('resource');
+if (!resource) {
+	document.getElementById("top").style.display = "block";
+}
+else {
+	var style = document.createElement('style');
+	style.innerHTML = "body, html { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; } #top { display: none; }"
+		document.body.appendChild(style);
+	var viewer = new Cesium.Viewer('cesiumContainer', {
+		//imageryProvider: basemapProvider,
+		//              terrainProvider: terrainProvider,
+		baseLayerPicker: false,
+		fullscreenButton: false,
+		homeButton: false,
+		timeline: false,
+		navigationHelpButton: false,
+		animation: false,
+		scene3DOnly: true,
+		geocoder: false
+	});
 
-    document.body.onkeyup = function(e) {
-      if (e.keyCode == 32) {
-        console.log(window.viewer.camera);
-      }
-    }
-
-    // custom viewer to view all lidar data
-    window.viewer.camera.position = {
-      x: -2505040.267327988,
-      y: -3849579.8556679944,
-      z: 4413232.863541417
-    }
-
-    window.viewer.camera.right = {
-      x: 0.7697564190624282,
-      y: 0.1956700897024687,
-      z: 0.6076086497982189
-    }
-
-    window.viewer.camera.up = {
-      x: -0.6383369044126985,
-      y: 0.23748291737685143,
-      z: 0.7322075255148646
-    }
-
-    window.viewer.camera.direction = {
-      x: 0.0010255625791728473,
-      y: 0.9514804674559364,
-      z: -0.3077074394148404
-    }
-
-
-    load_tiles();
-
-    function load_tiles() {
-
-      var tileset;
-
-      // get the list of tiles
-      $.get('data/tiles.txt', function(d) {
-
-        var tiles = d.split("\n");
-        var tiles = tiles.filter(function(v) {
-          return v !== ''
-        });
-
-        function loadTileset(i) {
-          var url = 'data/' + tiles[i] + '.json';
-          console.log('loading ' + url)
-          tileset = scene.primitives.add(new Cesium.Cesium3DTileset({
-            url: url
-          }));
-          return Cesium.when(tileset.readyPromise).then(function(tileset) {
+	var tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+		url: 'data/' + resource 
+	}));
+                    console.log(tileset);
+		
+	viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
+		url : '//assets.agi.com/stk-terrain/world'
+	});
+	tileset.readyPromise.then(function() {
+            console.log('Loaded tileset');
             var bounding = tileset._root._boundingVolume;
-            var center = bounding.boundingSphere.center
+            var center = bounding.boundingSphere.center;
             var cart = Cesium.Ellipsoid.WGS84.cartesianToCartographic(center);
+            var dest = Cesium.Cartesian3.fromDegrees(
+                    cart.longitude * (180 / Math.PI),
+                    cart.latitude * (180 / Math.PI),
+                    bounding.boundingSphere.radius * 2.2);
 
-            // uncomment this code to refresh the camera upon tile load 
-            //viewer.camera.setView({
-            //  destination: Cesium.Cartesian3.fromDegrees(cart.longitude * (180 / Math.PI), cart.latitude * (180 / Math.PI), 1000)
-            //});
-            if (i < tiles.length - 1) {
-              loadTileset(i + 1)
-            }
-            else {
-              console.log('tile load complete');
-            }
-          });
-        }
+            viewer.camera.setView({ destination: dest });
+             });
 
-        loadTileset(0);
-
-      });
-
-    }
+}
   </script>
 </body>
+<style>
+body {
+    background: #eee;
+}
 
+.table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}
+#tiles-banner {
+    width: 100%;
+}
+#resources {
+    margin-top: 64px;
+}
+
+#more, #about {
+    margin-top: 32px;
+}
+
+#top {
+    display: none;
+    margin: 10px 10px 10px 10px;
+}
+
+
+</style>
 </html>

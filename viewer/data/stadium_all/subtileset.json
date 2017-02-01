@@ -1,0 +1,208 @@
+{
+"boundingVolume": {
+"sphere": [-2505606.7412357354,-3847564.4813386216,4412182.937547942,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0001.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505394.4930117587,-3847606.539004193,4412266.226798811,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0002.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505428.9203035356,-3847539.6619472886,4412304.736247711,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0003.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505184.300988572,-3847827.633725201,4412193.2595393965,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0004.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505007.496652563,-3847888.250059179,4412240.461473179,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0005.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505165.9680630653,-3847712.647213785,4412303.203380256,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0006.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505320.014188071,-3847428.696229881,4412462.271233385,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0007.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505250.2260285835,-3847358.8164599505,4412562.151741328,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0008.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505417.0770430253,-3847136.817808884,4412660.312929467,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0009.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505159.425166021,-3847194.315057946,4412755.821266876,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0010.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505245.427880516,-3847032.5384733467,4412847.417178025,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0011.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505034.4008948267,-3847532.5782108787,4412533.367862894,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0012.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2504797.78651459,-3847648.8498624233,4412566.083759802,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0013.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2505005.048117219,-3847436.467067484,4412633.161490783,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0014.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2504777.6649032845,-3847468.9385264814,4412733.250538624,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0015.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2504752.65561464,-3847382.079742243,4412822.574904939,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0016.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2504983.893158853,-3847096.0557059515,4412939.8892448135,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0017.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2504946.534466187,-3847036.7539486135,4413012.304389177,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0018.pnts"
+},
+"children": []
+}
+,
+{
+"boundingVolume": {
+"sphere": [-2504703.772790534,-3847195.645442293,4413011.584455514,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0019.pnts"
+},
+"children": []
+}

@@ -1,0 +1,18 @@
+{
+"asset": {
+"version": "0.0"
+},
+"geometricError": 10000,
+"refine": "add",
+"root":
+{
+"boundingVolume": {
+"sphere": [-2505007.496652563,-3847888.250059179,4412240.461473179,100]
+},
+"geometricError": 0,
+"content": {
+"url": "stadium_all-0005.pnts"
+},
+"children": []
+}
+}
